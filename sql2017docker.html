@@ -87,7 +87,7 @@
       Den Container erzeugt man mit
     </p>
     <p><pre class="prettyprint">
-      docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" `
+      docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<YourStrong!Pa$$w0rd>" `
 
          -p 1401:1433 --name sql1 `
 
@@ -96,7 +96,7 @@
     </p>
     <p>
       auch wieder mit der Powershell ausgeführt. Bitte setzt das Kennwort hinter dem
-      MSSQL_SA_PASSWORD auf irgendwas kreatives… Hamburg1 oder so. :)
+      MSSQL_SA_PASSWORD auf irgendwas kreatives… Pa$$w0rd oder so. :)
     </p>
     <p>
       Der Container hat einen Namen (sql1) und der Port 1433 in dem Container wird
@@ -121,7 +121,7 @@
       Mit folgendem Befehl kann man sich dann mit dem SQL Server verbinden und allerhand Unfug machen:
     </p>
     <p><pre class="prettyprint">
-      PS C:\Program Files\Microsoft SQL Server\110\Tools\Binn> .\SQLCMD.EXE -S 127.0.0.1,1401 -U SA -P Hamburg1
+      PS C:\Program Files\Microsoft SQL Server\110\Tools\Binn> .\SQLCMD.EXE -S 127.0.0.1,1401 -U SA -P Pa$$W0rd
     </pre></p>
     <p>
       Beachtet bitte den Pfad - der ist natürlich davon abhängig, wo ihr SQL Server Management Studio installiert habt.
