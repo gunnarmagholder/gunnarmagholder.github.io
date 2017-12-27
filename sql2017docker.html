@@ -74,8 +74,9 @@
     <p>
       Mit dem Befehl
     </p>
-    <p>
+    <p><pre>
       docker pull microsoft/mssql-server-linux:2017-latest
+    </pre>
     </p>
     <p>
       unter der Powershell holt man sich das neueste Image für
@@ -85,12 +86,13 @@
     <p>
       Den Container erzeugt man mit
     </p>
-    <p>
+    <p><pre>
       docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" `
 
          -p 1401:1433 --name sql1 `
 
          -d microsoft/mssql-server-linux:2017-latest
+       </pre>
     </p>
     <p>
       auch wieder mit der Powershell ausgeführt. Bitte setzt das Kennwort hinter dem
@@ -118,9 +120,9 @@
     <p>
       Mit folgendem Befehl kann man sich dann mit dem SQL Server verbinden und allerhand Unfug machen:
     </p>
-    <p>
+    <p><pre>
       PS C:\Program Files\Microsoft SQL Server\110\Tools\Binn> .\SQLCMD.EXE -S 127.0.0.1,1401 -U SA -P Hamburg1
-    </p>
+    </pre></p>
     <p>
       Beachtet bitte den Pfad - der ist natürlich davon abhängig, wo ihr SQL Server Management Studio installiert habt.
     </p>
