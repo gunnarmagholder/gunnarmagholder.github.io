@@ -52,7 +52,79 @@
       Installieren und Starten von SQL Server 2017 auf einem Docker Container.
     </p>
     <p>
+      Wenn man das so macht hat man eigentlich einen Riesenvorteil - man braucht die Datenbankengine
+      nicht mehr auf dem lokalen Rechner und cluttert sich damit nicht die Kiste voll.
+      Normalerweise würde man ja das Ganze installieren und dann die Services auf Manuell stellen damit
+      nicht jedesmal im Hintergrund eine DB Engine CPU und Speicher klaut. Das braucht man nun nicht mehr.
+    </p>
+    <p>
+      Voraussetzungen <br />
+      Man braucht auf einer Windows Maschine auf jeden Fall Docker für Windows
+      (kleiner süßer Wal in der Taskleiste). Da das Docker Image für SQL 2017 nur auf
+      Linux läuft sollte man die Docker Container auf Linux umstellen - jeder Docker Host
+      kann nur eine Art von Betriebssystem laufen lassen; Windows oder eben Linux.
+    </p>
+    <p>
+      In diesem Fall (RMT auf den Wal) sieht man, dass ich unter Linux Containern
+      laufe - sonst könnte ich ja nicht auf Windows Container switchen.
+    </p>
+    <p>
+      Mit dem Befehl
+    </p>
+    <p>
+      docker pull microsoft/mssql-server-linux:2017-latest
+    </p>
+    <p>
+      unter der Powershell holt man sich das neueste Image für
+      SQL 2017 auf die lokale Maschine. Damit hat man wohlgemerkt nur das
+      Image auf dem Rechner, noch keinen lauffähigen Container!
+    </p>
+    <p>
+      Den Container erzeugt man mit
+    </p>
+    <p>
+      docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" `
 
+         -p 1401:1433 --name sql1 `
+
+         -d microsoft/mssql-server-linux:2017-latest
+    </p>
+    <p>
+      auch wieder mit der Powershell ausgeführt. Bitte setzt das Kennwort hinter dem
+      MSSQL_SA_PASSWORD auf irgendwas kreatives… Hamburg1 oder so. :)
+    </p>
+    <p>
+      Der Container hat einen Namen (sql1) und der Port 1433 in dem Container wird
+      auf dem Host (also der lokalen Maschine) als Port 1401 veröffentlich. Wichtig ist noch,
+      dass die Standardmäßig installierte Version die Developer Edition ist - man kann
+      aber auch eine Enterprise Version installieren. Das geht dann nur ein bisschen anders.
+    </p>
+    <p>
+      Wieder unter der Powershell kann man dann mit
+    </p>
+    <p>
+      docker ps
+    </p>
+    <p>
+      den geladenen und gestarteten Container anzeigen.
+    </p>
+    <p>
+      Bei Zugriffen bitte bedenken: Der SQL Server ist von aussen über den Port 1401 erreichbar,
+      nicht unter dem Standardport 1433 - den gibt es nur innerhalb des Containers!
+    </p>
+    <p>
+      Mit folgendem Befehl kann man sich dann mit dem SQL Server verbinden und allerhand Unfug machen:
+    </p>
+    <p>
+      PS C:\Program Files\Microsoft SQL Server\110\Tools\Binn> .\SQLCMD.EXE -S 127.0.0.1,1401 -U SA -P Hamburg1
+    </p>
+    <p>
+      Beachtet bitte den Pfad - der ist natürlich davon abhängig, wo ihr SQL Server Management Studio installiert habt.
+    </p>
+    <p>
+      Viel Spass und frohes Fest!<br/>
+
+      Gunnar
     </p>
 	</div>
       <div class="row footer">
@@ -73,68 +145,3 @@
     </div>
   </body>
 </html>
-
-
-<!--
-Im Rahmen meiner weihnachtlichen Versuche bin ich über folgende Geschichte gestolpert:
-
-Installieren und Starten von SQL Server 2017 auf einem Docker Container.
-
-
-
-Wenn man das so macht hat man eigentlich einen Riesenvorteil - man braucht die Datenbankengine nicht mehr auf dem lokalen Rechner und cluttert sich damit nicht die Kiste voll. Normalerweise würde man ja das Ganze installieren und dann die Services auf Manuell stellen damit nicht jedesmal im Hintergrund eine DB Engine CPU und Speicher klaut. Das braucht man nun nicht mehr.
-
-
-
-Voraussetzungen
-
-Man braucht auf einer Windows Maschine auf jeden Fall Docker für Windows (kleiner süßer Wal in der Taskleiste). Da das Docker Image für SQL 2017 nur auf Linux läuft sollte man die Docker Container auf Linux umstellen - jeder Docker Host kann nur eine Art von Betriebssystem laufen lassen; Windows oder eben Linux.
-
-
-
-In diesem Fall (RMT auf den Wal) sieht man, dass ich unter Linux Containern laufe - sonst könnte ich ja nicht auf Windows Container switchen.
-
-Mit dem Befehl
-
-docker pull microsoft/mssql-server-linux:2017-latest
-
-unter der Powershell holt man sich das neueste Image für SQL 2017 auf die lokale Maschine. Damit hat man wohlgemerkt nur das Image auf dem Rechner, noch keinen lauffähigen Container!
-
-Den Container erzeugt man mit
-
-docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" `
-
-   -p 1401:1433 --name sql1 `
-
-   -d microsoft/mssql-server-linux:2017-latest
-
-auch wieder mit der Powershell ausgeführt. Bitte setzt das Kennwort hinter dem MSSQL_SA_PASSWORD auf irgendwas kreatives… Hamburg1 oder so. :)
-
-Der Container hat einen Namen (sql1) und der Port 1433 in dem Container wird auf dem Host (also der lokalen Maschine) als Port 1401 veröffentlich. Wichtig ist noch, dass die Standardmäßig installierte Version die Developer Edition ist - man kann aber auch eine Enterprise Version installieren. Das geht dann nur ein bisschen anders.
-
-
-
-Wieder unter der Powershell kann man dann mit
-
-docker ps
-
-den geladenen und gestarteten Container anzeigen.
-
-
-
-Bei Zugriffen bitte bedenken: Der SQL Server ist von aussen über den Port 1401 erreichbar, nicht unter dem Standardport 1433 - den gibt es nur innerhalb des Containers!
-
-
-
-Mit folgendem Befehl kann man sich dann mit dem SQL Server verbinden und allerhand Unfug machen:
-
-PS C:\Program Files\Microsoft SQL Server\110\Tools\Binn> .\SQLCMD.EXE -S 127.0.0.1,1401 -U SA -P Hamburg1
-
-Beachtet bitte den Pfad - der ist natürlich davon abhängig, wo ihr SQL Server Management Studio installiert habt.
-
-
-
-Viel Spass und frohes Fest!
-
-Gunnar
--->
