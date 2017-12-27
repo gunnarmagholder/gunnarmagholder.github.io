@@ -74,7 +74,7 @@
     <p>
       Mit dem Befehl
     </p>
-    <p><pre>
+    <p><pre class="prettyprint">
       docker pull microsoft/mssql-server-linux:2017-latest
     </pre>
     </p>
@@ -86,7 +86,7 @@
     <p>
       Den Container erzeugt man mit
     </p>
-    <p><pre>
+    <p><pre class="prettyprint">
       docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>" `
 
          -p 1401:1433 --name sql1 `
@@ -120,7 +120,7 @@
     <p>
       Mit folgendem Befehl kann man sich dann mit dem SQL Server verbinden und allerhand Unfug machen:
     </p>
-    <p><pre>
+    <p><pre class="prettyprint">
       PS C:\Program Files\Microsoft SQL Server\110\Tools\Binn> .\SQLCMD.EXE -S 127.0.0.1,1401 -U SA -P Hamburg1
     </pre></p>
     <p>
@@ -146,6 +146,7 @@
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
     <script src="js/bootstrap.min.js"></script>
     </div>
   </body>
