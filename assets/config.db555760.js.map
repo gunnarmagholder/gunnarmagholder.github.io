@@ -1,1 +1,0 @@
-{"version":3,"file":"config.db555760.js","sources":["../../node_modules/@storybook/react/dist/esm/client/preview/config.js"],"sourcesContent":["export { render, renderToDOM } from './render';\nexport var parameters = {\n  framework: 'react'\n};"],"names":["parameters"],"mappings":"uKACU,IAACA,EAAa,CACtB,UAAW,OACb"}
